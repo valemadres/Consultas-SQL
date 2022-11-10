@@ -41,7 +41,25 @@ descendentemente
 
 10)  SELECIONE LOS 10 pagos mas bajos del 2004
 
-	SELECT * FROM payments WHERE paymentDate  BETWEEN '2003-01-01' AND '2003-12-31'  ORDER BY amount ASC LIMIT 10;
+	SELECT * FROM payments WHERE paymentDate  BETWEEN '2004-01-01' AND '2003-12-31'  ORDER BY amount ASC LIMIT 10;
+
+11)  SELECCIONAR TODOS LOS EMPLEADOS DE LAS OFICIANAS DE USA
+
+	SELECT employees.*,office.country
+	FROM employees
+	JOIN office ON employees.officeCode=offices.officeCode
+	WHERE offices.country='USA';
+
+12)  SELECCIONAR EL MONTO EN VENTAS DE LOS PRODUCTOS DE LA LINEA "Motorcycles"
+
+	SELECT SUM(payments.amount) AS total_ventas
+	FROM payments
+	JOIN customers ON payments.customerNumber=customers.customerNumber
+	JOIN orders ON customers.customerNumber=orders.customerNumber
+	JOIN orderdetails ON orders.orderNumber=orderdetails.orderNumber
+	JOIN products ON orderdetails.productCode=products.productCode
+	JOIN productlines ON products.productLine=productlines.productLine
+	WHERE productlines.productLine='Motorcycles';
 
 
 
